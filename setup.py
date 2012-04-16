@@ -5,7 +5,7 @@ from pypimirrors import __version__
 setup(
     name='pypi-mirrors',
     version=__version__,
-    packages=[''],
+    packages=['pypimirrors'],
     url='http://github.com/kencochrane/pypi-mirrors-lib',
     license='MIT',
     author='Ken Cochrane',
