@@ -42,8 +42,8 @@ LAST_SERVER = "last.pypi.python.org"
 MIRROR_SUFFIX= "pypi.python.org"
 
 STATUSES = {'GREEN':'Green',
-            'Yellow':'Yellow',
-            'Red':'Red'}
+            'YELLOW':'Yellow',
+            'RED':'Red'}
 
 
 def get_official_mirrors():
