@@ -211,9 +211,10 @@ def is_master_alive():
     return True
 
 
-def find_out_of_date_mirrors(mirrors=None):
+def find_out_of_date_mirrors(mirrors=None, unofficial_mirrors=None):
     """ Find the mirrors that are out of date """
-    results = mirror_statuses(mirrors=mirrors)
+    results = mirror_statuses(mirrors=mirrors,
+                              unofficial_mirrors=unofficial_mirrors)
     bad_mirrors = []
     for r in results:
         if r.get('status') == STATUSES.get('RED'):
@@ -221,18 +222,22 @@ def find_out_of_date_mirrors(mirrors=None):
     return bad_mirrors
 
 
-def __find_mirror_sort(sort_field, mirrors=None, reverse=False):
+def __find_mirror_sort(sort_field, mirrors=None, unofficial_mirrors=None,
+                       reverse=False):
     """ Find the first mirror that is sorted by sort_field """
-    results = mirror_statuses(mirrors=mirrors, ping_master_mirror=False)
+    results = mirror_statuses(mirrors=mirrors, ping_master_mirror=False,
+                              unofficial_mirrors=unofficial_mirrors)
     new_list = sorted(results, key=operator.itemgetter(sort_field), reverse=reverse)
     return new_list[0]
 
 
-def find_fastest_mirror(mirrors=None):
+def find_fastest_mirror(mirrors=None, unofficial_mirrors=None):
     """ Find the fastest mirror (via response time), might not be up to date """
-    return __find_mirror_sort('response_time', mirrors=mirrors)
+    return __find_mirror_sort('response_time', mirrors=mirrors,
+                              unofficial_mirrors=unofficial_mirrors)
 
 
-def find_freshest_mirror(mirrors=None):
+def find_freshest_mirror(mirrors=None, unofficial_mirrors=None):
     """ Find the freshest mirror (via last updated) """
-    return __find_mirror_sort('time_diff', mirrors=mirrors)
+    return __find_mirror_sort('time_diff', mirrors=mirrors,
+                               unofficial_mirrors=unofficial_mirrors)
