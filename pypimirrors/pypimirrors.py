@@ -216,7 +216,7 @@ def find_out_of_date_mirrors(mirrors=None):
     results = mirror_statuses(mirrors=mirrors)
     bad_mirrors = []
     for r in results:
-        if r.get('status') == STATUSES.get('OUTOFDATE'):
+        if r.get('status') == STATUSES.get('RED'):
             bad_mirrors.append(r)
     return bad_mirrors
 
